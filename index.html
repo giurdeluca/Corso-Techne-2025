@@ -695,76 +695,139 @@
       <li>Da completare</li>
     </ol>
   </div>
+  
 <!-- Integration of AI Tools Comparison Table -->
-  <div id="aiTools-container">
-    <div>
-      <button class="btn btn-download" onclick="downloadExcel()">Download Excel</button>
-      <button class="btn btn-theme" onclick="toggleTheme()">Change Theme</button>
-    </div>
-    <table id="aiTools" class="display">
-      <caption>Comparison of AI Tools (April 1, 2025)</caption>
-      <thead>
-        <tr>
-          <th>Capability</th>
-          <th><a href="https://chat.openai.com" target="_blank">ChatGPT</a></th>
-          <th><a href="https://claude.ai" target="_blank">Claude</a></th>
-          <th><a href="https://mistral.ai" target="_blank">Mistral</a></th>
-          <th><a href="https://gemini.google.com" target="_blank">Gemini</a></th>
-          <th><a href="https://makersuite.google.com" target="_blank">Google AI Studio</a></th>
-          <th><a href="https://perplexity.ai" target="_blank">Perplexity</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- General Skills Group -->
-        <tr class="group-header"><td colspan="7">General Skills</td></tr>
-        <tr><td>Everyday answers</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
-        <tr><td>Writing</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
-        <tr><td>Coding</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
-        <tr><td>Math</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
-        <tr><td>Reasoning</td><td>⭐</td><td>💰</td><td>✅</td><td>⭐</td><td>⭐</td><td>✅</td></tr>
-        <!-- Specific Tools Group -->
-        <tr class="group-header"><td colspan="7">Multimodal abilities</td></tr>
-        <tr><td>Web search</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>⭐</td></tr>
-        <tr><td>Deep research</td><td>💰</td><td>❌</td><td>❌</td><td>⭐</td><td>❌</td><td>⭐</td></tr>
-        <tr><td>Voice chat</td><td>⭐</td><td>❌</td><td>❌</td><td>✅</td><td>⭐</td><td>❌</td></tr>
-        <tr><td>Image generation</td><td>⭐</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
-        <tr><td>Image editing</td><td>⭐</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
-        <tr><td>Video generation</td><td>💰</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Live camera</td><td>⭐</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
-        <!-- Specific Tools Group -->
-        <tr class="group-header"><td colspan="7">Specific Tools</td></tr>
-        <tr><td>Code Interpreter</td><td>⭐</td><td>❌</td><td>⭐</td><td>✅</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Custom tools</td><td>💰</td><td>❌</td><td>❌</td><td>⭐</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Canvas</td><td>⭐</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Data analysis</td><td>⭐</td><td>⭐</td><td>✅</td><td>❌</td><td>✅</td><td>❌</td></tr>
-        <tr><td>App preview</td><td>⭐</td><td>⭐</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
-        <tr><td>Smart folders</td><td>💰</td><td>💰</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
-        <tr><td>Podcast generation</td><td>❌</td><td>❌</td><td>❌</td><td>⭐</td><td>✅</td><td>❌</td></tr>
-        <tr><td>Personalization</td><td>Custom Instructions + Memory</td><td>Custom Style</td><td>❌</td><td>Saved Info</td><td>System Instructions</td><td>Introduce Yourself</td></tr>
-        <!-- ... more rows ... -->
-      </tbody>
-    </table>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Tool Comparison – Aprile 2025</title>
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+  <style>
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+    table {
+      width: 100%;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: center;
+      padding: 8px;
+    }
+    th {
+      background-color: #1f1f1f;
+      color: #fff;
+    }
+    td {
+      border-bottom: 1px solid #333;
+    }
+    a {
+      color: #90caf9;
+    }
+    .legend {
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+    .btn {
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      background: #1e88e5;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      border-radius: 4px;
+    }
+    .btn:hover {
+      background: #1565c0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 AI Tool Comparison – Aprile 1, 2025</h1>
+
+  <div class="legend">
+    <strong>Legenda simboli:</strong> ⭐ = eccellente | ✅ = disponibile | ❌ = non disponibile | 💰 = solo a pagamento<br>
+    <strong>Funzionalità:</strong> risposte quotidiane, scrittura, codice, matematica, ragionamento, ricerca web, deep research,
+    chat vocale, generazione/modifica immagini, video, fotocamera live, interprete di codice, strumenti personalizzati,
+    canvas collaborativo, analisi dati, anteprima app, smart folders, podcast, personalizzazione.
   </div>
-  <!-- Scripts at the end of body -->
+
+  <button class="btn" onclick="downloadCSV()">📥 Scarica come Excel (CSV)</button>
+
+  <table id="aiTools" class="display">
+    <thead>
+      <tr>
+        <th>Funzione</th>
+        <th><a href="https://chat.openai.com" target="_blank">ChatGPT</a></th>
+        <th><a href="https://claude.ai" target="_blank">Claude</a></th>
+        <th><a href="https://mistral.ai" target="_blank">Mistral</a></th>
+        <th><a href="https://gemini.google.com" target="_blank">Gemini</a></th>
+        <th><a href="https://makersuite.google.com" target="_blank">Google AI Studio</a></th>
+        <th><a href="https://perplexity.ai" target="_blank">Perplexity</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Everyday answers</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Writing</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Coding</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Math</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Reasoning</td><td>⭐</td><td>💰</td><td>✅</td><td>⭐</td><td>⭐</td><td>✅</td></tr>
+      <tr><td>Web search</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>⭐</td></tr>
+      <tr><td>Deep research</td><td>💰</td><td>❌</td><td>❌</td><td>⭐</td><td>❌</td><td>⭐</td></tr>
+      <tr><td>Voice chat</td><td>⭐</td><td>❌</td><td>❌</td><td>✅</td><td>⭐</td><td>❌</td></tr>
+      <tr><td>Image generation</td><td>⭐</td><td>❌</td><td>✅</td><td>✅</td><td>✅</td><td>❌</td></tr>
+      <tr><td>Image editing</td><td>⭐</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
+      <tr><td>Video generation</td><td>💰</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td></tr>
+      <tr><td>Live camera</td><td>⭐</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td><td>❌</td></tr>
+      <tr><td>Code Interpreter</td><td>⭐</td><td>❌</td><td>⭐</td><td>✅</td><td>❌</td><td>❌</td></tr>
+      <tr><td>Custom tools</td><td>💰</td><td>❌</td><td>❌</td><td>⭐</td><td>❌</td><td>❌</td></tr>
+      <tr><td>Canvas</td><td>⭐</td><td>❌</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+      <tr><td>Data analysis</td><td>⭐</td><td>⭐</td><td>✅</td><td>❌</td><td>✅</td><td>❌</td></tr>
+      <tr><td>App preview</td><td>⭐</td><td>⭐</td><td>✅</td><td>✅</td><td>❌</td><td>❌</td></tr>
+      <tr><td>Smart folders</td><td>💰</td><td>💰</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td></tr>
+      <tr><td>Podcast generation</td><td>❌</td><td>❌</td><td>❌</td><td>⭐</td><td>✅</td><td>❌</td></tr>
+      <tr><td>Personalization</td><td>Custom Instructions + Memory</td><td>Custom Style</td><td>❌</td><td>Saved Info</td><td>System Instructions</td><td>Introduce Yourself</td></tr>
+    </tbody>
+  </table>
+
+  <!-- jQuery + DataTables -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('#aiTools').DataTable({
         paging: false,
         scrollX: true,
-        responsive: true
-      });
+        responsive: true,
+        info: false,
+        searching: false
+      })
     });
-    
-    function downloadExcel() {
-      var table = document.getElementById('aiTools');
-      var wb = XLSX.utils.table_to_book(table, { sheet: "AI Tools" });
-      XLSX.writeFile(wb, 'ai-tools.xlsx');
-    }
-    
-    function toggleTheme() {
-      document.body.classList.toggle('light-theme');
+
+    function downloadCSV() {
+      const table = document.getElementById('aiTools');
+      let csv = [];
+      for (let row of table.rows) {
+        let rowData = [];
+        for (let cell of row.cells) {
+          rowData.push(cell.innerText);
+        }
+        csv.push(rowData.join(','));
+      }
+      const blob = new Blob([csv.join('\\n')], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'AI_Tool_Comparison_April_1_2025.csv';
+      a.click();
+      URL.revokeObjectURL(url);
     }
   </script>
 </body>
