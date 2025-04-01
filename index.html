@@ -137,6 +137,74 @@
       }
     }
   </style>
+  <!-- DataTables CSS & SheetJS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
+  <!-- Optional: Additional CSS for the table integration -->
+  <style>
+    /* Styles for the AI Tools table */
+    #aiTools-container {
+      margin: 40px 0;
+      background-color: #121212;
+      color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    #aiTools-container .btn {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .btn-download {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .btn-theme {
+      background-color: #008CBA;
+      color: white;
+    }
+    .btn-download:hover {
+      background-color: #45a049;
+    }
+    .btn-theme:hover {
+      background-color: #007bb5;
+    }
+    table.dataTable {
+      border-collapse: collapse;
+      width: 100%;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #272727;
+    }
+    td {
+      border-bottom: 1px solid #333;
+    }
+    a {
+      color: #90caf9;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    caption {
+      caption-side: top;
+      text-align: left;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
   <!-- Course Information -->
@@ -607,5 +675,72 @@
       <li>Fine-tuning con Google AI studio, tutorial (inglese) <a href="https://ai.google.dev/gemini-api/docs/model-tuning">Google blog</a></li>
     </ul>
   </div>
+  <!-- Lesson 11 -->
+  <div class="lesson">
+    <h1 id="lezione-11">Lezione 11 - Gamma.app</h1>
+    <p class="date">📅 Data: 25-03-2025</p>
+    <h2>Overview</h2>
+    <ol>
+      <li>Da completare</li>
+    </ol>
+  </div>
+  <!-- Lesson 12 -->
+  <div class="lesson">
+    <h1 id="lezione-11">Lezione 12 - Gamma.app</h1>
+    <p class="date">📅 Data: 26-03-2025</p>
+    <h2>Overview</h2>
+    <ol>
+      <li>Da completare</li>
+    </ol>
+  </div>
+<!-- Integration of AI Tools Comparison Table -->
+  <div id="aiTools-container">
+    <div>
+      <button class="btn btn-download" onclick="downloadExcel()">Download Excel</button>
+      <button class="btn btn-theme" onclick="toggleTheme()">Change Theme</button>
+    </div>
+    <table id="aiTools" class="display">
+      <caption>Comparison of AI Tools (April 1, 2025)</caption>
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th><a href="https://chat.openai.com" target="_blank">ChatGPT</a></th>
+          <th><a href="https://claude.ai" target="_blank">Claude</a></th>
+          <th><a href="https://mistral.ai" target="_blank">Mistral</a></th>
+          <th><a href="https://gemini.google.com" target="_blank">Gemini</a></th>
+          <th><a href="https://makersuite.google.com" target="_blank">Google AI Studio</a></th>
+          <th><a href="https://perplexity.ai" target="_blank">Perplexity</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- General Skills Group -->
+        <tr class="group-header"><td colspan="7">General Skills</td></tr>
+        <tr><td>Everyday answers</td><td>⭐</td><td>⭐</td><td>✅</td><td>⭐</td><td>✅</td><td>✅</td></tr>
+        <!-- ... more rows ... -->
+      </tbody>
+    </table>
+  </div>
+  <!-- Scripts at the end of body -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#aiTools').DataTable({
+        paging: false,
+        scrollX: true,
+        responsive: true
+      });
+    });
+    
+    function downloadExcel() {
+      var table = document.getElementById('aiTools');
+      var wb = XLSX.utils.table_to_book(table, { sheet: "AI Tools" });
+      XLSX.writeFile(wb, 'ai-tools.xlsx');
+    }
+    
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+    }
+  </script>
 </body>
 </html>
