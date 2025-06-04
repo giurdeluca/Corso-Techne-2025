@@ -477,28 +477,39 @@
 
   <!-- jQuery e DataTables -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#aiTools').DataTable({
-        paging: false,
-        scrollX: true,
-        responsive: true,
-        info: false,
-        searching: false
-      });
-    });
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Initialize DataTable after a short delay to allow CSS to render fully
+      setTimeout(function() {
+        // Check if a DataTable instance already exists on #aiTools and destroy it
+        // This is good practice if the script might run multiple times, though not strictly
+        // necessary for a single page load.
+        if ($.fn.DataTable.isDataTable('#aiTools')) {
+          $('#aiTools').DataTable().destroy();
+        }
 
-    function downloadPDF() {
-      const element = document.getElementById('tabella-tools');
-      const opt = {
-        filename: 'AI_Tool_Comparison_April_1_2025.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
-      };
-      html2pdf().set(opt).from(element).save();
-    }
-  </script>
+        $('#aiTools').DataTable({
+          paging: false,
+          scrollX: true,
+          responsive: true,
+          info: false,
+          searching: false,
+          autoWidth: false // Added: Let responsive handle widths more aggressively
+        });
+      }, 100); // 100ms delay: gives browser time to render elements and apply styles
+    });
+
+    function downloadPDF() {
+      const element = document.getElementById('tabella-tools');
+      const opt = {
+        filename: 'AI_Tool_Comparison_April_1_2025.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
 </body>
 </html>
