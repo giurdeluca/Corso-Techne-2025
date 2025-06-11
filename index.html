@@ -532,7 +532,138 @@
       </tbody>
     </table>
   </div>
+  <div id="portfolio">
+    <meta charset="UTF-8" />
+    <title>Giulia's Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CDN (optional for styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Framer Motion (optional animations) -->
+    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+    </style>
+    <body>
+    <script type="text/javascript">
+      const { useState } = React;
 
+      const projects = [
+        {
+          title: "EmphysemaSeg",
+          description: "AI-powered tool for segmentation and analysis of emphysema in CT scans.",
+          tools: ["Python", "PyTorch", "SimpleITK", "scikit-image"],
+          link: "https://github.com/giurdeluca/EmphysemaSeg"
+        },
+        {
+          title: "GenAI Google Kaggle (Apr 2025)",
+          description: "Applied generative AI to biomedical data for a Kaggle challenge.",
+          tools: ["Python", "Transformers", "Kaggle API"],
+          link: "https://github.com/giurdeluca/GenAI-GoogleKaggle-apr2025"
+        }
+      ];
+
+      const blogPosts = [
+        { title: "AI for Lung Cancer: A Primer for Clinicians", link: "#", date: "May 2025" },
+        { title: "Bridging Engineering and Medicine", link: "#", date: "March 2025" }
+      ];
+
+      function Portfolio() {
+        const [selected, setSelected] = useState(null);
+
+        return React.createElement("div", { className: "max-w-4xl mx-auto space-y-8" }, [
+          React.createElement("section", { key: "about", className: "space-y-2" }, [
+            React.createElement("h1", { className: "text-3xl font-bold" }, "Hi, I'm Giulia"),
+            React.createElement(
+              "p",
+              { className: "text-base" },
+              "Biomedical engineer and PhD student in AI for lung cancer screening. Learn more on my ",
+              React.createElement("a", { href: "https://www.unibo.it/sitoweb/giulia.deluca19/", className: "text-blue-600 underline", target: "_blank" }, "academic site"),
+              "."
+            )
+          ]),
+
+          React.createElement("section", { key: "projects", className: "space-y-4" }, [
+            React.createElement("h2", { className: "text-2xl font-semibold" }, "Selected Projects"),
+            React.createElement(
+              "div",
+              { className: "grid md:grid-cols-2 gap-4" },
+              projects.map((p, i) =>
+                React.createElement(
+                  "div",
+                  {
+                    key: i,
+                    className: "border rounded-lg p-4 hover:bg-gray-50 cursor-pointer",
+                    onClick: () => setSelected(p)
+                  },
+                  [
+                    React.createElement("h3", { className: "text-xl font-semibold" }, p.title),
+                    React.createElement("p", { className: "text-sm text-gray-600" }, p.description)
+                  ]
+                )
+              )
+            ),
+            selected &&
+              React.createElement("div", { className: "p-4 border rounded-xl bg-gray-50" }, [
+                React.createElement("h3", { className: "text-lg font-bold" }, selected.title),
+                React.createElement("p", {}, selected.description),
+                React.createElement("p", { className: "text-sm text-gray-700" }, "Tools: " + selected.tools.join(", ")),
+                React.createElement("a", { href: selected.link, className: "text-blue-600 underline", target: "_blank" }, "View Project ↗")
+              ])
+          ]),
+
+          React.createElement("section", { key: "blog", className: "space-y-2" }, [
+            React.createElement("h2", { className: "text-2xl font-semibold" }, "Blog"),
+            React.createElement(
+              "ul",
+              {},
+              blogPosts.map((post, idx) =>
+                React.createElement(
+                  "li",
+                  { key: idx },
+                  React.createElement("a", { href: post.link, className: "text-blue-600 underline" }, post.title),
+                  " ",
+                  React.createElement("span", { className: "text-sm text-gray-500" }, `(${post.date})`)
+                )
+              )
+            )
+          ]),
+
+          React.createElement("section", { key: "cv" }, [
+            React.createElement(
+              "a",
+              {
+                href: "https://www.unibo.it/sitoweb/giulia.deluca19/download/CV%20Giulia%20Raffaella%20De%20Luca%20-%20feb%202024%20-%20ENG.pdf",
+                target: "_blank",
+                className: "inline-block mt-4 px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+              },
+              "Download CV"
+            )
+          ]),
+
+          React.createElement("section", { key: "contact", className: "space-y-2" }, [
+            React.createElement("h2", { className: "text-2xl font-semibold" }, "Get in Touch"),
+            React.createElement("p", {}, "Feel free to reach out for collaboration or opportunities."),
+            React.createElement(
+              "a",
+              {
+                href: "mailto:giulia.r.deluca@gmail.com",
+                className: "inline-block px-4 py-2 border border-gray-400 rounded hover:bg-gray-100"
+              },
+              "📧 Email Me"
+            )
+          ])
+        ]);
+      }
+
+      ReactDOM.createRoot(document.getElementById("portfolio")).render(React.createElement(Portfolio));
+    </script>
+  </div>
   <!-- jQuery e DataTables -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
